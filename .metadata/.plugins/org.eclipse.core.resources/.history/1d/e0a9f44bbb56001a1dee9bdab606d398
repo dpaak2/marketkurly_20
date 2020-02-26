@@ -1,0 +1,25 @@
+package com.marketkurly.web.services;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.marketkurly.web.domains.Cart;
+import com.marketkurly.web.domains.Pager;
+import com.marketkurly.web.domains.Product;
+import com.marketkurly.web.mappers.ProductMapper;
+
+@Service
+public class ProductService {
+	@Autowired ProductMapper productMapper;
+	@Autowired Product product;
+	@Override public void save(Object o) { cartMapper.insert(cart);}
+	@Override public String count(Object o) { return cartMapper.count();}
+	@Override public Cart detail(Object o) { return cartMapper.selectById(String.valueOf(o));}
+	@Override public List<?> list(Object o){ return cartMapper.select((Pager) o);}
+	@Override public void edit(Object o) { cartMapper.update((Cart)o);}
+	@Override public void remove(Object o) { cartMapper.delete(String.valueOf(o));}
+	public void create() { cartMapper.create();}
+	
+
+
+}

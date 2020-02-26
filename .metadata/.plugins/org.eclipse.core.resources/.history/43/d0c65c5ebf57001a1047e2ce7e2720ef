@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.marketkurly.web.mappers.MemberMapper">
+
+	
+   
+
+   <select id="existId" resultType="String" parameterType="String">
+    select userid
+    from users
+    where userid LIKE #{userId}
+   </select> 
+
+   
+   
+    <select id="countMember" resultType="int" >
+    SELECT COUNT(*)
+    FROM users
+   </select>
+   
+   <select id="selectById" parameterType="com.marketkurly.web.domains.Member" resultType="com.marketkurly.web.domains.Member" >
+    SELECT *
+    FROM users
+    WHERE userid LIKE #{userId}
+    AND passwd LIKE #{passwd}
+   </select>
+   
+  <select id="selectNIP" resultType="com.marketkurly.web.domains.Member" parameterType="com.marketkurly.web.domains.Member">
+         select * 
+         from users
+         where userid like #{userId} and passwd like #{passwd}
+   </select>
+   
+   <select id="selectUserByIdPw" parameterType="com.marketkurly.web.domains.Member" resultType="com.marketkurly.web.domains.Member" >
+    SELECT *
+    FROM users
+    WHERE userid LIKE #{userId}
+    AND username LIKE #{userName}
+    AND email LIKE #{email}
+   </select>
+   
+   <select id="selectUserByName" parameterType="com.marketkurly.web.domains.Member" resultType="com.marketkurly.web.domains.Member" >
+    SELECT *
+    FROM users
+    WHERE username LIKE #{userName}
+    AND email LIKE #{email}
+   </select>
+   
+   <select id="selectUserByName" resultType="Map" >
+    SELECT email
+	FROM users
+   </select>
+   
+   <update id="updateMember">
+   	
+   </update>
+  
+  <delete id="deleteMember" parameterType="String">
+  	DELETE 
+  	FROM member
+  	WHERE userid LIKE #{userId}
+  </delete>
+  
+</mapper>

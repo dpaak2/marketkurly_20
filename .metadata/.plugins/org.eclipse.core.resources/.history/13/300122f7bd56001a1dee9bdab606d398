@@ -1,0 +1,22 @@
+package com.marketkurly.web.mappers;
+
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.marketkurly.web.domains.Member;
+import com.marketkurly.web.domains.Pager;
+
+
+
+@Repository
+public interface MemberMapper {
+
+	public void insert(Member member);
+	public Member selectById(String userId);
+	public int existId(String userId);
+	public String count();
+	public void update(Member member);
+	public void delete(String userId);
+	public List<?> select(Pager pager);
+	public void create();
+}

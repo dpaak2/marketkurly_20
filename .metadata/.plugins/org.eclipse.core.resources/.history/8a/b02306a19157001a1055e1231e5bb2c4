@@ -1,0 +1,95 @@
+package com.marketkurly.web.controllers;
+
+import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.marketkurly.web.domains.Member;
+import com.marketkurly.web.enums.Messenger;
+import com.marketkurly.web.mappers.MemberMapper;
+import com.marketkurly.web.services.MemberService;
+import com.marketkurly.web.util.Printer;
+
+@RestController
+@RequestMapping("/member")
+public class MemberController {
+
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class); 
+	@Autowired Map<String, Object> map;
+	@Autowired Member member;
+	@Autowired Printer printer;
+	@Autowired MemberMapper memberMapper;
+	@Autowired MemberService memberService;
+	
+	@GetMapping("/{userId}/exist")
+	public Messenger existId(@PathVariable String userId) {
+		System.out.println("userId::::"+userId);
+		Function<String, Integer> p = o-> memberMapper.existId(userId);
+		map.clear();
+		printer.accept("중복체크카운트:"+ p.apply(userId));
+		map.put("msg", (p.apply(userId)==0) ? "SUCCESS" : "FAIL");
+		return Messenger.SUCCESS;
+	}
+	
+	@PostMapping("/join")
+	public Messenger join(@RequestBody Member param) {
+		printer.accept("join 들어옴:" +param.toString());
+		memberService.save(param);
+		/*Consumer<Member> m = o->memberService.selectUserByIdPw(param); 
+		m.accept(param);
+		map.clear();
+		map.put("msg", "SUCCESS");*/
+		return Messenger.SUCCESS;
+	}
+	
+	@PostMapping("/login")
+	public Member login(@RequestBody Member param) {
+		
+		System.out.println("000000"+param.getUserId());
+		
+		return memberService.login(param.getUserId());
+	}
+
+	
+	@PostMapping("/searchMemberByName")
+	public Member searchMemberById(@RequestBody Member param) {
+		System.out.println("email::" +param.getEmail() + "  name::"+param.getUserName());
+		
+		return memberService.selectUserByName(param);
+	}
+	@PostMapping("/searchPassword")
+	public Member searchPassword(@RequestBody Member member) {
+		System.out.println("/searchPassword++ userId::"+member.getUserId()+"userName::"+member.getUserName()+"userEmail:::"+member.getEmail());
+		System.out.println("dskjflsjkdlsjfslk");
+		return memberMapper.selectUserByIdPw(member);
+	}
+	
+	@PutMapping("/update")
+	public Map<?, ?> updateMember(@PathVariable String userId, @RequestBody Member param) {
+		Consumer<Member> m = o->memberMapper.update(param);
+		m.accept(param);
+		map.clear();
+		map.put("msg", "SUCCESS");
+		return map;
+	}
+	
+	@DeleteMapping("/remove")
+	public Map<?, ?> removeMember(@PathVariable String userId, @RequestBody Member param) {
+		Consumer<Member> m = o->memberMapper.delete(userId);
+		m.accept(param);
+		map.clear();
+		map.put("msg", "SUCCESS");
+		return map;
+	}
+	
+}

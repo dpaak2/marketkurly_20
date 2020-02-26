@@ -1,0 +1,321 @@
+"use strict"
+var app = app || {};
+
+app = (()=>{
+   let init=()=>{
+      
+      import('/resources/js/vue/homeVue.js').then(()=>{
+         $('body').html(homeVue.home_nav).append(homeVue.home_main).append(homeVue.home_footer);
+         gogojoin(),gogologin(),details(),goodshop()
+      }),
+      import('/resources/js/vue/joinVue.js').then(()=>{
+         
+      }),
+      import('/resources/js/vue/loginVue.js').then(()=>{
+      }),
+      import('/resources/js/vue/detailVue.js').then(()=>{
+
+      }),
+      import('/resources/js/vue/goodshopVue.js').then(()=>{
+
+      }),
+      import('/resources/js/vue/idsearchVue.js').then(()=>{
+         
+      }),
+      import('/resources/js/vue/pwsearchVue.js').then(()=>{
+
+      }),
+      import('/resources/js/vue/mypageVue.js').then(()=>{
+
+      }),
+      import('/resources/js/vue/mypageUpdateVue.js').then(()=>{
+
+      })
+   }
+   let run=()=>{
+      init()
+   }
+   /**join start */
+   let gogojoin=()=>{
+      $('#gojoin').click(e=>{
+         e.preventDefault()
+         $('#body').empty()
+         $('#body').html(joinVue.joininfofo)
+
+            /* 중복확인 */
+            $('#idVali').click(e=>{
+               e.preventDefault()
+               alert('sdsdss VALIDATION');
+               console.log('user ID :::' +$('#userId').val() )
+               let userId =$('#userId').val();
+                $.getJSON('/member/'+userId+'/exist',d=>{
+                  //alert('dfsdfs userIDIDIDID::'+d)
+                  console.log('dfsdfs userIDIDIDID::'+d)
+
+                  if(d=="SUCCESS"){
+                     alert('사용가능한 아이디 입니다.')
+                  }else{
+                     alert('중복된 아이디 입니다.')
+                  }
+                })
+            })
+
+           
+            /* 중복확인 */
+         $('#joinbtn').click(e=>{
+            e.preventDefault()
+            alert('dd')
+            console('userId',$('#userId').val())
+           
+        $.ajax({
+               url:'/member/join',
+               type:'POST',
+               data:JSON.stringify({
+                userId:$('#userId').val(),
+                passwd: $('#passwd').val(),
+                userName: $('#userName').val(),
+                
+
+               }),
+               dataType:'json',
+               contentType : 'application/json',
+               success :d=>{
+                  alert('join success ')
+                  
+               },
+               error :e=>{
+                  alert('필수항목을 확인하여 주세요')
+               }
+            })
+         })
+      })
+   }
+/**join end */
+/**login end **/
+
+   let gogologin=()=>{
+      $('#gologin').click(e=>{
+         e.preventDefault()
+         alert('gologin')
+         $('#body').empty()
+         $('#body').html(loginVue.loginVuego)
+         
+      $('#search_id').click(e=>{
+         e.preventDefault()
+         alert('search_id')
+         $('#body').empty()
+         $('#body').html(idsearchVue.idsearchVue_go)
+         $('#findById').click(e=>{
+            e.preventDefault()
+            alert('findById');
+            console.log('email::'+ $('#email').val()+ 'userName::'+$('#userName').val())
+             $.ajax({
+               url:'/member/searchMemberByName',
+               type:'POST',
+               data:JSON.stringify({
+                  email:$('#email').val(),
+                  userName:$('#userName').val()
+               }),
+               dataType:'json',
+               contentType:'application/json',
+               success: d=>{
+                  
+                  let userId= d.userId
+                  alert('find id success ::: ' +userId)
+               },
+               error : e=>{
+                  alert('잘못된 id 또는 pw 입니다')
+               }
+            })
+         })
+      })
+      $('#search_pw').click(e=>{
+         e.preventDefault()
+         alert('search_pw')
+         $('#body').empty()
+         $('#body').html(pwsearchVue.pwsearchVue_go)
+         $('#searchPw').click(e=>{
+            /*alert('findsearchPwsearchPwsearchPw');*/
+            console.log('username::'+$('#userName').val()+'userID::'+$('#userId').val()+'useremail::'+$('#email').val())
+            $.ajax({
+               url:'/member/searchPassword',
+               type:'POST',
+               data:JSON.stringify({
+                  email:$('#email').val(),
+                  userName:$('#userName').val(),
+                  userId :$('#userId').val()
+                  
+               }),
+               dataType:'json',
+               contentType:'application/json',
+               success: d=>{
+                  
+                  let passwd = d.passwd
+                  alert('귀하의 비밀번호는  ' +passwd +'  입니다')
+               },
+               error : e=>{
+                  alert('잘못된 id 또는 pw 입니다')
+               }
+            })
+         })
+      })
+
+      $('#loginbtn').click(e=>{
+         e.preventDefault()
+         $.ajax({
+         url:'/member/login',
+         type:'POST',
+         data:JSON.stringify({
+            userId:$('#userId').val(),
+            passwd:$('#passwd').val()
+         }),
+         dataType:'json',
+         contentType:'application/json',
+         success: d=>{
+            let asd = d.userId
+            alert(JSON.stringify(asd))
+            sessionStorage.setItem("userid",asd)
+            sessionStorage.setItem("passwd",d.passwd)
+            console.log(sessionStorage.getItem("userid"))
+            console.log(sessionStorage.getItem("passwd"))
+            
+            if(asd ==null){
+               $('#body').empty()
+               $('#body').append(homeVue.home_main);
+            }else{
+               $('#body').empty()
+               $('#body').append(homeVue.home_main);
+               $('#gologin_btn').empty()
+               $('#gologin_btn').html('<a id="logout" href="">로그아웃</a>').append('<a style="margin-right:5%" id="mypage" href="">마이페이지</a>')
+             
+            }
+              $('#mypage').click(e=>{
+                  alert('mypage')
+                  e.preventDefault()
+                  $('#body').empty()
+                  $('#body').html(mypageVue.mypageVuego)
+                  console.log('ghkrdlsdf::'+ sessionStorage.getItem("userid"))
+                  $.ajax({
+                        url: '/member/selectNIP',
+                        type: 'POST',
+                        data: JSON.stringify({
+                           userId: sessionStorage.getItem("userid"),
+                           passwd: sessionStorage.getItem("passwd")
+                        }),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: d => {
+                           alert('성공이냐')
+                           $('#userName').text(d.userName)
+                           $('#userid').text(d.userId)
+
+                           $('#validpasswd').click(e => {
+                              e.preventDefault()
+                              if ($('#userpasswd').val() == d.passwd) {
+                                 alert('성공' +d.passwd)
+                                  $('#body').empty()
+                                  $('#body').html(mypageUpdateVue.maypageUpdateVuego)
+                                  $('#userName').text(d.userName);
+                                  $('#userId').attr('value',d.userId);
+                                  $('#usrName').attr('placeholder',d.userName);
+                                  $('#usrEmail').attr('placeholder',d.email)
+                                  $('#usrMobile').attr('placeholder',d.mobile)
+                                  /**  check before update email  */
+                                  $('#emailVali').click(e=>{
+                                     e.preventDefault()
+                                      alert('email validation!!')
+                                       if($('#usrEmail').val()=="" || $('#usrEmail').val()==d.email ){
+                                          alert('no changes user email')
+                                             $('#usrEmail').val(d.email);
+                                             console.log($('#usrEmail').val())
+                                          }else{
+                                                alert('user changed email')
+                                                /** email overlap check */
+                                                $.getJSON('/member/checkEmail',d=>{
+                                                   console.log(d)
+                                                   console.log(d.length)
+                                                   for(i=0;i<d;i++){
+
+                                                   }
+                                                   if($('#usrEmail').val()==d.email){
+                                                      alert('이미 존재하는 아이디 입니다.')
+
+                                                   }else{
+                                                      
+                                                      alert('사용가능한 아이디 입니다.')
+                                                   }
+                                                })
+                                                
+                                          }
+                                  })
+                                  /**  check before update email end  */
+                                  /**delete account */
+                                  $('#deleteAccount').click(e=>{
+                                     e.preventDefault()
+                                     alert('회원탈퇴')
+                                  })
+                                  /**delete account end*/
+                                  /**update user Detail */
+                                  $('#updateDetail').click(e=>{
+                                     e.preventDefault()
+                                     alert('회원 정보 수정 되었습니다.')
+                                  })
+                                  /**update user Detail end */
+                              } else {
+                                 alert('비밀번호가 일치하지 않습니다')
+                              }
+                           })
+
+                        },
+                        error: e => {
+                           alert('실패냐')
+                        }
+                     })
+               })
+            
+         },
+         error : e=>{
+            alert('잘못된 id 또는 pw 입니다')
+         }
+      })
+      })
+      
+      })
+   }
+
+   let details=()=>{
+      $('#detail1').click(e=>{
+         e.preventDefault()
+         $('#body').empty()
+         $('#body').html(detailVue.detailinfofo1)
+      }),
+
+      $('#detail2').click(e=>{
+         e.preventDefault()
+         $('#body').empty()
+         $('#body').html(detailVue.detailinfofo2)
+      }),
+
+      $('#detail3').click(e=>{
+         e.preventDefault()
+         $('#body').empty()
+         $('#body').html(detailVue.detailinfofo3)
+      }),
+      $('#detail4').click(e=>{
+         e.preventDefault()
+         $('#body').empty()
+         $('#body').html(detailVue.detailinfofo4)
+      })
+   }
+
+   let goodshop=()=>{
+      $('#good_shop').click(e=>{
+         e.preventDefault()
+         $('#body').html(goodshopVue.goodshopVue_body)
+      })
+   }
+
+   
+
+   return {run}
+})()

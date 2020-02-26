@@ -1,0 +1,68 @@
+1581997697050	Rename package 'com.marketkurly.web.mapper'
+1581997767435	Copy package
+1581997778800	Copy package
+1581997793474	Copy package
+1581997806438	Copy package
+1581997815992	Copy package
+1581997823675	Copy package
+1581997963784	Delete element
+1581998021246	Copy compilation unit
+1581998028777	Rename type 'Customer'
+1581998039580	Copy compilation unit
+1581998072576	Rename type 'User'
+1581998085441	Copy compilation unit
+1581998092268	Copy compilation unit
+1581998111069	Copy compilation unit
+1581998122843	Delete element
+1581998159199	Copy compilation unit
+1581998171985	Copy compilation unit
+1581998197024	Copy compilation unit
+1581998204077	Copy compilation unit
+1581998243002	Copy compilation unit
+1581998284069	Copy compilation unit
+1581998289656	Copy compilation unit
+1581998296694	Rename type 'pager'
+1581998304147	Copy compilation unit
+1581998331042	Rename compilation unit 'pager.java'
+1581998337854	Delete element
+1581998346583	Copy compilation unit
+1581998405108	Copy compilation unit
+1581998413408	Copy compilation unit
+1581998417199	Copy compilation unit
+1581999426748	Rename resource 'Member.xml'
+1581999529302	Rename resource 'Member.mapper.xml'
+1581999602662	Rename resource 'Cart.xml'
+1581999627309	Copy file
+1582004684292	Move compilation unit
+1582004700824	Copy compilation unit
+1582004715703	Copy compilation unit
+1582004733632	Copy compilation unit
+1582004761201	Copy compilation unit
+1582005345942	Delete element
+1582005719346	Copy file
+1582005780131	Move compilation unit
+1582005786625	Delete element
+1582013025906	Encapsulate field 'username'
+1582013040467	Encapsulate field 'birthday'
+1582013048542	Encapsulate field 'gender'
+1582013059389	Encapsulate field 'userid'
+1582013065893	Encapsulate field 'passwd'
+1582013073813	Encapsulate field 'email'
+1582013078997	Encapsulate field 'mobile'
+1582014209773	Delete element
+1582015400940	Delete element
+1582016387774	Rename resource ' marketkurlyLogo.png'
+1582213670418	Rename resource 'marketkurlyLogo.png'
+1582269131814	Copy file
+1582269220863	Copy file
+1582269266440	Rename resource 'detailVue.js'
+1582269381886	Copy file
+1582269639950	Copy file
+1582269704895	Rename resource 'goodshopVue2.js'
+1582270096207	Move file
+1582270217788	Delete element
+1582280790597	Copy file
+1582280820449	Copy file
+1582280825224	Copy file
+1582280845052	Rename resource 'CartMapper2.xml'
+1582280919919	Rename package 'com.marketkurly.web.mapper'

@@ -1,0 +1,23 @@
+var mypageVue = mypageVue || {}
+
+mypageVue = {
+   mypageVuego :()=>{
+      return `<style>
+       .dropdown-item-text{
+           color: #333;
+           font-size: 11px;
+       }
+       .dropdown-item-text:hover{
+           background-color: #eee;
+           color: #5f0080;
+       } 
+       .dropdown-item-text-active{
+           background-color: #eee;
+           color: #5f0080;
+       }
+   </style>
+    <div id="mypagev" style="background-color:#f7f7f7 ">
+        
+    </div>`
+   }
+}

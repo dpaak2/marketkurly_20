@@ -1,0 +1,17 @@
+package com.marketkurly.web.mappers;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.marketkurly.web.domains.Pager;
+import com.marketkurly.web.domains.Product;
+
+@Repository
+public interface ProductMapper {
+
+	public void insert(Product p);
+	public String count();
+	public List<Product> selectAll(Pager p);
+	public void updateProduct(Product product);
+	public void deleteProduct(Product product);
+	public Product selectById(String prodSeq);
+}

@@ -1,0 +1,14 @@
+package com.marketkurly.web.services;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.marketkurly.web.domains.Member;
+import com.marketkurly.web.mappers.MemberMapper;
+import com.marketkurly.web.util.Pager;
+
+@Service
+public class MemberService {
+	
+
+}

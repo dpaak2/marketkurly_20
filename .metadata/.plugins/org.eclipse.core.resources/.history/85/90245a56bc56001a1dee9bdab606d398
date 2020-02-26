@@ -1,0 +1,50 @@
+package com.marketkurly.web.services;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.marketkurly.web.domains.Member;
+import com.marketkurly.web.domains.Pager;
+import com.marketkurly.web.mappers.MemberMapper;
+
+@Service
+public class MemberService implements IService{
+
+	@Override
+	public void save(Object o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String count(Object o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<?> list(Object o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object detail(Object o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void edit(Object o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(Object o) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+}

@@ -1,0 +1,20 @@
+package com.marketkurly.web.mappers;
+
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.marketkurly.web.domains.Member;
+
+
+
+@Repository
+public interface MemberMapper {
+
+	public void insert(Member member);
+	public Member selectById(String userId);
+	public int existId(String userId);
+	public String count();
+	public void update(Member member);
+	public void deleteMember(Member member);
+	public List<?> select();
+}

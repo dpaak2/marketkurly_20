@@ -1,0 +1,16 @@
+package com.marketkurly.web.mappers;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.marketkurly.web.domains.Pager;
+import com.marketkurly.web.domains.Review;
+
+@Repository
+public interface ReviewMapper {
+
+	public void insertReview(Review r);
+	public String countReview();
+	public List<Review> selectAll(Pager o);
+	public void updateReview(Review review);
+	public void deleteReview(Review review);
+}

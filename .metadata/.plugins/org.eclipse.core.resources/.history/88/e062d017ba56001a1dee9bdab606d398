@@ -1,0 +1,18 @@
+package com.marketkurly.web.mappers;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.marketkurly.web.domains.Cart;
+import com.marketkurly.web.domains.Pager;
+
+
+@Repository
+public interface CartMapper {
+
+	public List<Cart> selectAll(Pager p); 
+	public void deleteCart(Cart cart);
+	public void insert(Cart cart);
+	public String count();
+	public Cart selectById(String cartSeq);
+	public List<T> selectAll ();
+}

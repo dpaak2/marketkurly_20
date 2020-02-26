@@ -1,0 +1,6 @@
+var maypageUpdate = maypageUpdate || {}
+maypageUpdate = {
+	maypageUpdateVue :()=>{
+		return ``
+	}
+}

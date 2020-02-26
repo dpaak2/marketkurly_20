@@ -1,0 +1,19 @@
+"use strict"
+var homeVue = homeVue||{}
+homeVue={
+	/*homeVue start */
+	/**navbar start */
+    navbar:()=>{
+		
+	}
+/**navbar start */
+
+
+
+
+
+
+
+	/*homeVue the end */
+}
+
